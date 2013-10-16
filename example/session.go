@@ -1,12 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"github.com/typester/web"
 	"github.com/typester/web/session"
 	"github.com/typester/web/session/cookie"
 	"github.com/typester/web/session/memory"
 	"time"
-	"fmt"
 )
 
 func Counter(c *web.Context) {
@@ -30,13 +30,12 @@ func Counter(c *web.Context) {
 }
 
 func main() {
-	state := &cookie.CookieState{ Name:"session", HttpOnly:true }
+	state := &cookie.CookieState{Name: "session", HttpOnly: true}
 	store := memory.NewMemoryStore()
 
-	session.Setup(state, store, "secret", time.Hour * 24 * 365)
+	session.Setup(state, store, "secret", time.Hour*24*365)
 
 	app := web.NewApp()
 	app.Handle("/", Counter)
 	app.Run(":5000")
 }
-

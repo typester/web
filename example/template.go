@@ -16,12 +16,3 @@ func main() {
 	app.Handle("/", Root).Methods("POST")
 	app.Run(":5000")
 }
-
-
-
-
-
-
-
-
-

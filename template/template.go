@@ -1,11 +1,11 @@
 package template
 
 import (
-	"path/filepath"
-	"os"
-	"strings"
-	"net/http"
 	"html/template"
+	"net/http"
+	"os"
+	"path/filepath"
+	"strings"
 )
 
 var templateDir string
@@ -17,8 +17,8 @@ func TemplateDir() string {
 
 func SetTemplateDir(dir string) (err error) {
 	tmpl = template.New("web")
-	
-	err = filepath.Walk(dir, func (path string, info os.FileInfo, err error) error {
+
+	err = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 		if strings.HasSuffix(path, ".html") {
 			name := strings.TrimPrefix(path, dir)
 			if name[0] == os.PathSeparator {
@@ -35,23 +35,3 @@ func SetTemplateDir(dir string) (err error) {
 func Render(w http.ResponseWriter, name string, args map[string]interface{}) error {
 	return tmpl.ExecuteTemplate(w, name, args)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

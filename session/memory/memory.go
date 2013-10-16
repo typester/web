@@ -7,11 +7,11 @@ import (
 
 type MemoryStore struct {
 	data map[string]interface{}
-	mu sync.Mutex
+	mu   sync.Mutex
 }
 
 func NewMemoryStore() *MemoryStore {
-	return &MemoryStore{ map[string]interface{}{}, sync.Mutex{} }
+	return &MemoryStore{map[string]interface{}{}, sync.Mutex{}}
 }
 
 func (m *MemoryStore) GetData(sessionId string) interface{} {
@@ -22,7 +22,7 @@ func (m *MemoryStore) GetData(sessionId string) interface{} {
 	if !ok {
 		return nil
 	}
-	
+
 	return data
 }
 
@@ -32,11 +32,3 @@ func (m *MemoryStore) SetData(sessionId string, data map[string]interface{}, exp
 
 	m.data[sessionId] = data
 }
-
-
-
-
-
-
-
-

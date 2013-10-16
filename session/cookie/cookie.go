@@ -9,7 +9,7 @@ import (
 
 type CookieState struct {
 	Name, Path, Domain string
-	HttpOnly, Secure bool
+	HttpOnly, Secure   bool
 	session.State
 }
 
@@ -25,7 +25,7 @@ func (state *CookieState) GetSessionID(ctx *web.Context) (session_id string, err
 
 func (state *CookieState) SaveSessionID(ctx *web.Context, sd *session.SessionData) error {
 	cookie := &http.Cookie{
-		Name: state.Name,
+		Name:  state.Name,
 		Value: sd.SessionID(),
 	}
 
@@ -36,7 +36,7 @@ func (state *CookieState) SaveSessionID(ctx *web.Context, sd *session.SessionDat
 		cookie.Domain = state.Domain
 	}
 
-	cookie.Expires = time.Now().Add( sd.Expires() )
+	cookie.Expires = time.Now().Add(sd.Expires())
 
 	if state.HttpOnly {
 		cookie.HttpOnly = true
@@ -46,23 +46,6 @@ func (state *CookieState) SaveSessionID(ctx *web.Context, sd *session.SessionDat
 	}
 
 	http.SetCookie(ctx, cookie)
-		
+
 	return nil
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
